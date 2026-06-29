@@ -1,0 +1,5 @@
+dist/
+kc
+*.exe
+bin/
+obj/
