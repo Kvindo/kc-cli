@@ -13,6 +13,10 @@ import (
 	"golang.org/x/term"
 )
 
+// version is the semantic client version, baked in at build time via
+// -ldflags "-X main.version=vX.Y.Z" (see the Makefile). "dev" for un-tagged local builds.
+var version = "dev"
+
 func main() {
 	profileName := os.Getenv("KC_PROFILE")
 	if profileName == "" {
@@ -29,6 +33,22 @@ func main() {
 	}
 
 	args := os.Args[1:]
+
+	// `kc version` is handled locally so it always reports the baked-in semantic client version and
+	// works offline. We also show the server version, but never fail the command if it's unreachable.
+	if len(args) >= 1 && (args[0] == "version" || args[0] == "--version" || args[0] == "-v") {
+		fmt.Printf("kc %s\n", version)
+		if _, body, err := post(p.Server, p.Token, []string{"version"}, nil, nil, ""); err == nil {
+			var sr Response
+			if json.Unmarshal(body, &sr) == nil && sr.Stdout != "" {
+				fmt.Print(sr.Stdout)
+				if !strings.HasSuffix(sr.Stdout, "\n") {
+					fmt.Println()
+				}
+			}
+		}
+		return
+	}
 
 	status, body, err := postRetrying(p.Server, p.Token, args, nil, nil, "")
 	if err != nil {

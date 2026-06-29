@@ -1,13 +1,17 @@
+# Semantic client version baked into the binary (kc version). Override: make build VERSION=v1.2.3
+VERSION ?= v1.0.0
+LDFLAGS = -s -w -X main.version=$(VERSION)
+
 build:
-	go build -ldflags="-s -w" -o kc .
+	go build -ldflags="$(LDFLAGS)" -o kc .
 
 build-all:
-	CGO_ENABLED=0 GOOS=linux   GOARCH=amd64 go build -ldflags="-s -w" -o dist/kc-linux-amd64 .
-	CGO_ENABLED=0 GOOS=linux   GOARCH=arm64 go build -ldflags="-s -w" -o dist/kc-linux-arm64 .
-	CGO_ENABLED=0 GOOS=darwin  GOARCH=amd64 go build -ldflags="-s -w" -o dist/kc-darwin-amd64 .
-	CGO_ENABLED=0 GOOS=darwin  GOARCH=arm64 go build -ldflags="-s -w" -o dist/kc-darwin-arm64 .
-	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o dist/kc-windows-amd64.exe .
-	CGO_ENABLED=0 GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o dist/kc-windows-arm64.exe .
+	CGO_ENABLED=0 GOOS=linux   GOARCH=amd64 go build -ldflags="$(LDFLAGS)" -o dist/kc-linux-amd64 .
+	CGO_ENABLED=0 GOOS=linux   GOARCH=arm64 go build -ldflags="$(LDFLAGS)" -o dist/kc-linux-arm64 .
+	CGO_ENABLED=0 GOOS=darwin  GOARCH=amd64 go build -ldflags="$(LDFLAGS)" -o dist/kc-darwin-amd64 .
+	CGO_ENABLED=0 GOOS=darwin  GOARCH=arm64 go build -ldflags="$(LDFLAGS)" -o dist/kc-darwin-arm64 .
+	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="$(LDFLAGS)" -o dist/kc-windows-amd64.exe .
+	CGO_ENABLED=0 GOOS=windows GOARCH=arm64 go build -ldflags="$(LDFLAGS)" -o dist/kc-windows-arm64.exe .
 
 clean:
 	rm -f kc dist/*

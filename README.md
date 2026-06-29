@@ -13,15 +13,22 @@ declaratively with `kc apply -f <manifest>`.
 
 ## 1. Install
 
-### Quick install (Linux / macOS)
+### Quick install
+
+**Linux / macOS:**
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/Kvindo/kc-cli/main/install.sh | sh
 ```
 
-This downloads the right binary for your OS/architecture from the latest release and installs it to
-`/usr/local/bin` (override with `KC_INSTALL_DIR`). On Windows, download `kc-windows-amd64.exe` from
-the [latest release](https://github.com/Kvindo/kc-cli/releases/latest) and put it on your `PATH`.
+**Windows (PowerShell):**
+
+```powershell
+irm https://raw.githubusercontent.com/Kvindo/kc-cli/main/install.ps1 | iex
+```
+
+These download the right binary for your OS/architecture from the latest release and install it
+(`/usr/local/bin` on Linux/macOS, `%LOCALAPPDATA%\kc` on Windows; override with `KC_INSTALL_DIR`).
 
 ### Manual download
 
