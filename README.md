@@ -13,7 +13,17 @@ declaratively with `kc apply -f <manifest>`.
 
 ## 1. Install
 
-### Option A — download a prebuilt binary
+### Quick install (Linux / macOS)
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Kvindo/kc-cli/main/install.sh | sh
+```
+
+This downloads the right binary for your OS/architecture from the latest release and installs it to
+`/usr/local/bin` (override with `KC_INSTALL_DIR`). On Windows, download `kc-windows-amd64.exe` from
+the [latest release](https://github.com/Kvindo/kc-cli/releases/latest) and put it on your `PATH`.
+
+### Manual download
 
 Grab the binary for your platform from the [latest release](https://github.com/Kvindo/kc-cli/releases/latest):
 
@@ -29,13 +39,12 @@ Grab the binary for your platform from the [latest release](https://github.com/K
 Rename it to `kc` (or `kc.exe`), make it executable, and put it on your `PATH`:
 
 ```sh
-# Linux / macOS
 chmod +x kc-linux-amd64
 sudo mv kc-linux-amd64 /usr/local/bin/kc
 kc version
 ```
 
-### Option B — build from source
+### Build from source
 
 Requires Go 1.25+:
 
@@ -46,6 +55,11 @@ make build            # produces ./kc
 # or cross-compile every platform into dist/:
 make build-all
 ```
+
+For local CLI development there is a self-rebuilding launcher (`make dev-install`) that recompiles
+`kc` whenever the Go sources change.
+
+---
 
 ## 2. Authenticate
 
