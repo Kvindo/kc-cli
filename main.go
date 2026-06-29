@@ -34,19 +34,9 @@ func main() {
 
 	args := os.Args[1:]
 
-	// `kc version` is handled locally so it always reports the baked-in semantic client version and
-	// works offline. We also show the server version, but never fail the command if it's unreachable.
+	// `kc version` is handled locally — it reports the baked-in semantic version and works offline.
 	if len(args) >= 1 && (args[0] == "version" || args[0] == "--version" || args[0] == "-v") {
 		fmt.Printf("kc %s\n", version)
-		if _, body, err := post(p.Server, p.Token, []string{"version"}, nil, nil, ""); err == nil {
-			var sr Response
-			if json.Unmarshal(body, &sr) == nil && sr.Stdout != "" {
-				fmt.Print(sr.Stdout)
-				if !strings.HasSuffix(sr.Stdout, "\n") {
-					fmt.Println()
-				}
-			}
-		}
 		return
 	}
 
