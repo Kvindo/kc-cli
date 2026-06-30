@@ -1,6 +1,12 @@
 # `kc` — Kvindo Cloud CLI
 
-`kc` is the command-line client for [Kvindo Cloud](https://cloud.kvindo.com). It talks to the
+[![Latest release](https://img.shields.io/github/v/release/Kvindo/kc-cli?sort=semver)](https://github.com/Kvindo/kc-cli/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/Kvindo/kc-cli)](LICENSE)
+[![Platforms](https://img.shields.io/badge/platforms-linux%20%7C%20macOS%20%7C%20windows-blue)](https://github.com/Kvindo/kc-cli/releases/latest)
+
+`kc` is the **command-line interface (CLI) for [Kvindo Cloud](https://cloud.kvindo.com)** — a
+kubectl-style client to manage cloud infrastructure (VMs, S3 object storage, Kubernetes, load
+balancers, VPCs, VPNs, managed PostgreSQL) from the terminal. It talks to the
 same API as the web console, so anything you can see or change in the console you can also script
 with `kc`. It is modelled on `kubectl`: you read resources with `kc get` and create/update them
 declaratively with `kc apply -f <manifest>`.
@@ -56,8 +62,7 @@ kc version
 Requires Go 1.25+:
 
 ```sh
-git clone https://github.com/Kvindo/kc-cli.git
-cd kc-cli
+cd KvindoCloud.CLI
 make build            # produces ./kc
 # or cross-compile every platform into dist/:
 make build-all
@@ -424,3 +429,13 @@ use **manifests** (`kc apply -f`) for create/update:
 - Docker-style `run` / `stop`, and `image rm` / `volume rm`  (top-level `kc rm <type> <name>` does work — it's an alias for `delete`)
 
 There is no `logs`, `exec`, or `watch` (`-w` streaming) in this version.
+
+---
+
+## Related projects
+
+Part of the Kvindo Cloud developer toolchain:
+
+- **[terraform-provider-kvindo](https://github.com/Kvindo/terraform-provider-kvindo)** — Terraform provider for Kvindo Cloud ([Registry](https://registry.terraform.io/providers/kvindo/kvindo/latest)).
+- **[kc-sdk-python](https://github.com/Kvindo/kc-sdk-python)** — Python SDK for the Kvindo Cloud API ([PyPI](https://pypi.org/project/kc-sdk-python/)).
+- **[Kvindo Cloud console](https://cloud.kvindo.com)** — web UI and API.
